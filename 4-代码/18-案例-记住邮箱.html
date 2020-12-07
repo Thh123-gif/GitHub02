@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="email"/><br/>
+    <input type="checkbox" id="remeber">记住用户邮箱?<br/>
+    <button>提交</button>
+
+    <script>
+        var btn = document.querySelector("button");
+        var remeber = document.querySelector("#remeber");
+        var email = document.querySelector("#email");
+
+        var data = document.cookie;
+        var arr = data.split("; ");
+        var obj = {};
+        arr.forEach( function( item ,index ){
+            var key = item.split("=")[0];
+            var val = item.split("=")[1];
+            obj[key] = val;
+        } )
+
+        if( obj.myEmail ){
+            remeber.checked = true;
+            email.value = obj.myEmail;
+        }
+
+        btn.onclick = function(){
+            if( remeber.checked ){
+                var d = new Date();
+                // 设置存在1小时
+                d.setTime( d.getTime()+60*60*1000 );
+                var expires = "expires="+d.toGMTString();
+                document.cookie = "myEmail="+email.value+"; "+expires;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            color:white;
+            background: green;
+            width: 10rem;
+            height: 5rem;
+            font-size:1rem;
+        }
+    </style>
+</head>
+<body>
+    <p>购物车</p>
+    <script>
+        // 当窗口大小发生改变的时候触发代码
+        window.onresize =  function(){
+            setFontSize();
+        }
+
+        function setFontSize(){
+            // 获取网页的屏幕宽度
+            var pageWidth = window.innerWidth;
+
+            // 可以自己定义一个比例,让宽度除以这个份数,设置为html的字体大小
+            // 比如,我们比例定义成15
+            var htmlFontSize = pageWidth / 15;
+            document.documentElement.style.fontSize = htmlFontSize + "px";
+        }
+
+        // 手动调用一次,第一次打开网页的时候,也设置html的字体大小
+        setFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas>您的浏览器不支持canvas</canvas>
+    <script>
+        var canvas = document.querySelector("canvas");
+        var content = canvas.getContext("2d");
+        canvas.width = 600;
+        canvas.height = 400;
+        canvas.style.border = "1px solid red";
+
+        var color1 = getRandomColor();
+        var color2 = getRandomColor();
+        var color3 = getRandomColor();
+        var color4 = getRandomColor();
+
+        content.fillStyle = color1;
+        content.fillRect(20,30,50,20);
+        content.fillStyle = color2;
+        content.fillRect(20,60,50,20);
+        content.fillStyle = color3;
+        content.fillRect(20,90,50,20);
+        content.fillStyle = color4;
+        content.fillRect(20,120,50,20);
+
+        content.fillStyle = color1;
+        content.textBaseline = "top";
+        content.fillText("15-20岁",80,35);
+        content.fillStyle = color2;
+        content.textBaseline = "top";
+        content.fillText("20-25岁",80,65);
+        content.fillStyle = color3;
+        content.textBaseline = "top";
+        content.fillText("25-30岁",80,95);
+        content.fillStyle = color4;
+        content.textBaseline = "top";
+        content.fillText("30岁以上",80,125);
+
+        //圆
+        content.beginPath();
+        content.moveTo(350,200);
+        content.arc(350,200,140,0,0.3 * Math.PI); 
+        content.fillStyle = color1;
+        content.fill();
+
+        content.beginPath();
+        content.moveTo(350,200);
+        content.arc(350,200,140,0.3 * Math.PI,1.4 * Math.PI); 
+        content.fillStyle = color2;
+        content.fill();
+
+        content.beginPath();
+        content.moveTo(350,200);
+        content.arc(350,200,140,1.4 * Math.PI,-0.3 * Math.PI); 
+        content.fillStyle = color3;
+        content.fill();
+
+        content.beginPath();
+        content.moveTo(350,200);
+        content.arc(350,200,140,-0.3 * Math.PI,0); 
+        content.fillStyle = color4;
+        content.fill();
+
+        var text1 = "25-30岁";
+        content.beginPath();
+        content.font = "16px 微软雅黑";
+        content.textBaseline = "middle";
+        content.textAlign = "center";
+        content.fillStyle = color3;
+        content.fillText(text1,400,30);
+
+        var textWidth1 = content.measureText(text1).width;
+        content.moveTo(400 + textWidth1 / 2,43);
+        content.lineTo(400 - textWidth1 / 2,43);
+        content.lineTo(350,200);
+        content.strokeStyle = color3;
+        content.stroke();
+
+        var text2 = "30岁以上";
+        content.beginPath();
+        content.font = "16px 微软雅黑";
+        content.textBaseline = "middle";
+        content.textAlign = "center";
+        content.fillStyle = color4;
+        content.fillText(text2,540,130);
+
+        var textWidth2 = content.measureText(text2).width;
+        content.moveTo(540 + textWidth2 / 2,143);
+        content.lineTo(540 - textWidth2 / 2,143);
+        content.lineTo(350,200);
+        content.strokeStyle = color4;
+        content.stroke();
+
+        var text3 = "15-20岁";
+        content.beginPath();
+        content.font = "16px 微软雅黑";
+        content.textBaseline = "middle";
+        content.textAlign = "center";
+        content.fillStyle = color1;
+        content.fillText(text3,540,280);
+
+        var textWidth3 = content.measureText(text3).width;
+        content.moveTo(540 + textWidth3 / 2,293);
+        content.lineTo(540 - textWidth3 / 2,293);
+        content.lineTo(350,200);
+        content.strokeStyle = color1;
+        content.stroke();
+
+        var text4 = "20-25岁";
+        content.beginPath();
+        content.font = "16px 微软雅黑";
+        content.textBaseline = "middle";
+        content.textAlign = "center";
+        content.fillStyle = color2;
+        content.fillText(text4,200,300);
+
+        var textWidth4 = content.measureText(text4).width;
+        content.moveTo(200 - textWidth4 / 2,313);
+        content.lineTo(200 + textWidth4 / 2,313);
+        content.lineTo(350,200);
+        content.strokeStyle = color2;
+        content.stroke();
+
+
+        // 随机颜色的方法
+        function getRandomColor(){
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+
+            return "rgb("+r+","+g+","+b+")";
+        }
+    </script>
+</body>
+</html>

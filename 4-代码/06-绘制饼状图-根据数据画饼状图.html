@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600" height="400">浏览器不支持画布标签</canvas>
+    <script>
+        var mycanvas = document.querySelector("canvas");
+        var ctx = mycanvas.getContext("2d");
+
+        // 画饼图的构造函数
+        function PieCharts( data , ctx ){
+            this.ctx = ctx || document.querySelector("canvas").getContext("2d");
+            // 画布的宽度高度
+            this.canvasWidth = this.ctx.canvas.width;
+            this.canvasHeight = this.ctx.canvas.height;
+
+            // 圆心坐标
+            this.x0 =  this.canvasWidth / 2 + 50;
+            this.y0 =  this.canvasHeight / 2;
+
+            // 圆半径
+            this.radius = 150;
+
+            // 超出圆外的线长度
+            this.outLine = 20;
+
+            // 调用初始化方法
+            this.init( data );
+        }
+
+        // 给构造函数通过原型对象添加方法
+        // 初始化方法
+        PieCharts.prototype.init = function( data ){
+            // 绘制饼形状
+            this.drawPie( data );
+        }
+        // 绘制饼形状方法
+        PieCharts.prototype.drawPie = function( data ){
+            // 得到转换以后的数据
+            var resultData = this.transformAngle( data );
+
+            // 缓存this
+            var that = this;
+
+            // 根据数据渲染出饼状图
+            // this.ctx.arc(x, y, r, sAngle, eAngle, false);
+            // this.ctx.arc(圆心x坐标, 圆心y坐标, 半径, 开始弧度, 结束弧度 , 绘制方向 );
+
+            // 开始弧度
+            var startAngle = 0;
+            // 遍历resultData
+            resultData.forEach( function( item, index ){
+                // 结束弧度
+                var endAngle = startAngle + item.angle;
+                // 开启新路径
+                that.ctx.beginPath();
+                // 起点位置
+                that.ctx.moveTo( that.x0, that.y0 );
+                // 绘制弧形轨迹
+                that.ctx.arc( that.x0, that.y0, that.radius, startAngle, endAngle );
+                // 得到随机颜色值
+                var color = that.getRandomColor();
+                // 填充颜色
+                that.ctx.fillStyle = color;
+                // 填充
+                that.ctx.fill();
+
+                // 调用绘制标题的方法
+                that.drawTitle( startAngle , item.angle , color , item.title );
+
+                // 下一次的开始弧度就是上一次结束弧度
+                startAngle = endAngle;
+            } );
+
+            // 调用绘制描述的方法
+            this.drawDesc();
+        }
+
+        // 把数据转换成对应角度(对应弧度)的方法
+        PieCharts.prototype.transformAngle = function( data ){
+            // 计算总数量
+            var totalNum = 0;
+            data.forEach( function( item, index ) {
+                totalNum += item.num;
+            })
+
+            // 计算每个种类应该对应的度数是多少
+            data.forEach( function( item, index ) {
+                var angle = item.num / totalNum * ( 2 * Math.PI ) ;
+                // 给对象添加一个新的angle属性
+                item.angle = angle;
+            })
+
+            // 返回添加过度数的数组
+            return data;
+        }
+
+        // 得到一个随机颜色的方法
+        PieCharts.prototype.getRandomColor = function(){
+            var r = Math.floor( Math.random()*256 );
+            var g = Math.floor( Math.random()*256 );
+            var b = Math.floor( Math.random()*256 );
+            return `rgb(${r},${g},${b})`;
+        }
+
+        // 绘制饼上面的线以及文字说明 标题部分
+        PieCharts.prototype.drawTitle = function( startAngle, angle , color ,title ){
+            /*1.确定伸出去的线 通过圆心点 通过伸出去的点  确定这个线*/
+            /*2.确定伸出去的点 需要确定伸出去的线的长度*/
+            /*3.固定伸出去的线的长度*/
+            /*4.计算这个点的坐标*/
+            /*5.需要根据角度和斜边的长度*/
+            /*5.1 使用弧度  当前扇形的起始弧度 + 对应的弧度的一半 */
+            /*5.2 半径+伸出去的长度 */
+
+            // 斜边c的长度
+            var c = this.radius + this.outLine;
+            // 求出起点三点钟方向 到 当前饼状块一半的弧度
+            var currentAngleHalf =  startAngle + angle / 2;
+
+            // 两个直角边的长度
+            var b = Math.sin( currentAngleHalf ) * c;
+            var a = Math.cos( currentAngleHalf ) * c;
+
+            // 求出圆对应饼状块外面点坐标
+            var outX = this.x0 + a;
+            var outY = this.y0 + b;
+            
+            // 开始画线
+            this.ctx.moveTo(this.x0 , this.y0);
+            this.ctx.lineTo(outX , outY);
+            this.ctx.strokeStyle = color;
+            this.ctx.stroke();
+
+            // 设置字体大小
+            this.ctx.font = "20px 宋体";
+
+            // 获取字体内容的宽度
+            var textWidth = this.ctx.measureText( title ).width;
+            
+            // 设置文字的水平对齐方向
+            if( outX < this.x0){
+                this.ctx.textAlign = "right";
+                // 画下划线
+                this.ctx.moveTo(outX, outY );
+                this.ctx.lineTo(outX - textWidth, outY );
+                this.ctx.stroke();
+            }else{
+                this.ctx.textAlign = "left";
+                // 画下划线
+                this.ctx.moveTo(outX, outY );
+                this.ctx.lineTo(outX + textWidth, outY );
+                this.ctx.stroke();
+            }
+            // 设置文字的垂直对齐方式
+            this.ctx.textBaseline = "bottom" ;
+            // 画文字
+            this.ctx.fillText( title , outX, outY );
+        }
+
+
+        // 绘制左上角描述部分
+        PieCharts.prototype.drawDesc = function(){
+            console.log("绘制描述");
+        }
+
+        // 定义数组
+        var mydata = [
+            {
+                title: '15-20岁',
+                num: 6
+            },
+            {
+                title: '20-25岁',
+                num: 30
+            },
+            {
+                title: '25-30岁',
+                num: 10
+            },
+            {
+                title: '30以上',
+                num: 8
+            }
+        ];
+        new PieCharts( mydata );
+    </script>
+</body>
+</html>

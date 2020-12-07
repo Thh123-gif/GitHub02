@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600" height="400">浏览器不支持画布标签</canvas>
+    <script>
+        var mycanvas = document.querySelector("canvas");
+        var ctx = mycanvas.getContext("2d");
+
+        // 画饼图的构造函数
+        function PieCharts(){
+            // 调用初始化方法
+            this.init();
+        }
+
+        // 给构造函数通过原型对象添加方法
+        // 初始化方法
+        PieCharts.prototype.init = function(){
+            // 绘制饼形状
+            this.drawPie();
+        }
+        // 绘制饼形状方法
+        PieCharts.prototype.drawPie = function(){
+            console.log( "绘制绘制饼形状" );
+            this.drawTitle();
+            this.drawDesc();
+        }
+        // 绘制饼上面的线以及文字说明 标题部分
+        PieCharts.prototype.drawTitle = function(){
+            console.log("绘制标题");
+        }
+        // 绘制左上角描述部分
+        PieCharts.prototype.drawDesc = function(){
+            console.log("绘制描述");
+        }
+
+        new PieCharts();
+    </script>
+</body>
+</html>

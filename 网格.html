@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas>您的浏览器不支持canvas</canvas>
+    <div class="box"></div>
+    <script>
+        var canvas = document.querySelector("canvas");
+        var content = canvas.getContext("2d");
+
+        canvas.width = 600;
+        canvas.height = 400;
+        canvas.style.border = "1px solid red";
+
+        // 网格大小
+        var gridSize = 10;
+        // 画布宽高度
+        var canvasWidth = canvas.width;
+        var canvasHeight = canvas.height;
+        
+        var maxLineX = canvasWidth / gridSize;
+        var maxLineY = canvasHeight / gridSize;
+        // 横
+        for(var i = 1; i < maxLineY; i ++){
+            content.beginPath();
+            content.moveTo(0,gridSize * i+0.5);
+            content.lineTo(canvasWidth,gridSize * i+0.5);
+            content.strokeStyle = "#eee";
+            content.stroke();
+        }
+        // 竖
+        for(var j = 1; j < maxLineX ; j++){
+            content.beginPath();
+            content.moveTo(gridSize * j+0.5,0);
+            content.lineTo(gridSize * j+0.5,canvasHeight);
+            content.strokeStyle = "#eee";
+            content.stroke();
+        }
+
+        // 箭头
+        content.beginPath();
+        content.moveTo(20,20);
+        content.lineTo(25,30);
+        content.lineTo(15,30);
+        content.closePath();
+        content.fill();
+
+        // 箭头y轴
+        content.beginPath();
+        content.moveTo(20,30);
+        content.lineTo(20,380);
+        content.lineWidth = 2;
+        content.strokeStyle = "#555";
+        content.stroke();
+        
+        // 箭头x轴
+        content.beginPath();
+        content.moveTo(20,380);
+        content.lineTo(580,380);
+        content.lineWidth = 2;
+        content.strokeStyle = "#555";
+        content.stroke();
+
+        // 箭头
+        content.beginPath();
+        content.moveTo(580,380);
+        content.lineTo(570,375);
+        content.lineTo(570,385);
+        content.closePath();
+        content.fill();
+        
+        // 边界到第一
+        content.beginPath();
+        content.moveTo(20,380);
+        content.lineTo(120,260);
+        content.stroke();
+
+        // 第一到第二
+        content.beginPath();
+        content.moveTo(120,260);
+        content.lineTo(220,210);
+        content.stroke();
+
+        // 第二到第三
+        content.beginPath();
+        content.moveTo(220,210);
+        content.lineTo(310,160);
+        content.stroke();
+
+        // 第三到第四
+        content.beginPath();
+        content.moveTo(310,160);
+        content.lineTo(410,60);
+        content.stroke();
+
+        // 第四到第五
+        content.beginPath();
+        content.moveTo(410,60);
+        content.lineTo(520,310);
+        content.stroke();
+
+        // 第一个坐标
+        content.beginPath();
+        content.moveTo(117,257);
+        content.lineTo(123,257);
+        content.lineTo(123,263);
+        content.lineTo(117,263);
+        content.closePath();
+        content.fill();
+
+
+        // 第二个坐标
+        content.beginPath();
+        content.moveTo(217,207);
+        content.lineTo(223,207);
+        content.lineTo(223,213);
+        content.lineTo(217,213);
+        content.closePath();
+        content.fill();
+
+        // 第三个坐标
+        content.beginPath();
+        content.moveTo(313,157);
+        content.lineTo(307,157);
+        content.lineTo(307,163);
+        content.lineTo(313,163);
+        content.closePath();
+        content.fill();
+
+        // 第四个坐标
+        content.beginPath();
+        content.moveTo(413,57);
+        content.lineTo(407,57);
+        content.lineTo(407,63);
+        content.lineTo(413,63);
+        content.closePath();
+        content.fill();
+
+        // 第五个坐标
+        content.beginPath();
+        content.moveTo(517,307);
+        content.lineTo(523,307);
+        content.lineTo(523,313);
+        content.lineTo(517,313);
+        content.closePath();
+        content.fill();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 1000px;
+        }
+        /* CSS3中提供了一个媒体查询,意思用于根据不用的设置,可以应用不同的样式 */
+        /* 
+        @media mediatype and|not|only (media feature) {
+            CSS-Code;
+        }
+
+        @media 查询类型 and|not|only (媒体特征) {
+            CSS代码
+        }
+
+        查询类型的取值有三种 all print screen 平时使用的比较多的就是 screen
+
+        关键字
+            关键字将媒体类型或多个媒体特性连接到一起做为媒体查询的条件。
+            and：可以将多个媒体特性连接到一起，相当于“且”的意思。
+            not：排除某个媒体类型，相当于“非”的意思，可以省略。
+            only：指定某个特定的媒体类型，可以省略。 
+
+        媒体特性
+            width     输出设备的宽度
+            min-width 输出设备的最小宽度
+            max-width 输出设备的最大宽度   
+        */
+
+        /* 当媒体设备尺寸不超过800px的时候,设置body的背景颜色为粉色         */
+        @media screen and ( max-width: 800px ) {
+            body{
+                background: pink;
+            }
+            html{
+                font-size:30px;
+            }
+        }
+
+        /* 当媒体设备尺寸等于800px的时候,设置body的背景颜色为黄色         */
+        @media screen and ( width: 800px ) {
+            body{
+                background: yellow;
+            }
+            html{
+                font-size:50px;
+            }
+        }
+
+        /* 当媒体设备尺寸最小800px的时候,设置body的背景颜色为天空色         */
+        @media screen and ( min-width: 801px ) {
+            body{
+                background: skyblue;
+            }
+            html{
+                font-size:100px;
+            }
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            background: orange;
+            border:1rem solid black;
+        }
+
+        /* 以上代码,我们是使用媒体查询改变了html字体大小 */
+    </style>
+</head>
+<body>
+    <div>div的内容</div>
+</body>
+</html>

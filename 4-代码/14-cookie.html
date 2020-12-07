@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 设置cookie 缓存数据 document.cookie = "键名=键值";
+        // 只设置了值,没有设置有效期,默认关闭浏览器就会失效
+        // document.cookie = "username=zhangsan";
+        // document.cookie = "age=23";
+        // document.cookie = "sex=男";
+
+        // 获取cookie缓存数据 document.cookie
+        // console.log( document.cookie  );
+
+        var data = document.cookie;
+        var arr = data.split("; ");
+        var obj = {};
+        arr.forEach( function( item ,index ){
+            var key = item.split("=")[0];
+            var val = item.split("=")[1];
+            obj[key] = val;
+        } )
+        console.log( obj );
+    </script>
+</body>
+</html>

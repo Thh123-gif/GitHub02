@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+            /* background: url(./精灵图/士兵.png); */
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600" height="400">您的浏览器不支持canvas</canvas>
+    <script>
+        var canvas = document.querySelector("canvas");
+        var content = canvas.getContext("2d");
+
+        var canvasWidth = content.canvas.width;
+        var canvasHeight = content.canvas.height;
+        // 新建img对象
+        var img = new Image();
+        var Timer = null;
+        // 图片加载完后再执行事件，否则获取不到图片的宽高
+        img.onload = function(){
+            // 图片的宽高
+            var imgWidth = img.width;
+            var imgHeight = img.height;
+            // 每一帧的宽高度
+            var everyWidth = imgWidth / 4;
+            var everyHeight = imgHeight / 4;
+            // 定义从盒子的中心开始
+            var x0 = canvasWidth / 2 - everyWidth / 2;
+            var y0 = canvasHeight / 2 - everyHeight / 2;
+            var [xnum,ynum] = [0,0];
+
+            // 键盘事件
+            document.onkeydown = function(e){
+                console.log(e.keyCode);
+                switch(e.keyCode){
+                    case 38:
+                        // 上
+                        move(ynum,0,-2,213);
+                        break;
+                    case 40:
+                        // 下
+                        move(ynum,0,2,14);
+                        break;
+                    case 37:
+                        // 左
+                        move(xnum,-2,0,79);
+                        break;
+                    case 39:
+                        // 右
+                        move(xnum,2,0,143);
+                        break;
+                }
+            }
+            // num ：一行图片的数量
+            // stepx : 动的x坐标
+            // stepy : 动的y坐标
+            // top ： 每一行对应动作的精灵图距离
+            function move(num,stepx,stepy,top){
+                clearInterval(Timer);
+                Timer = setInterval(function(){
+                    content.translate(stepx,stepy);
+                    num ++;
+                    num = num > 3 ? 0 : num;
+                    content.clearRect(0,0,canvasWidth,canvasHeight);
+                    content.drawImage(img,everyWidth*num,top,everyWidth,everyHeight,x0,y0,80,80);
+                },200);
+            }
+            // 初始化画布
+            content.drawImage(img,0,12,everyWidth,everyHeight,x0,y0,80,80);
+
+            // document.onkeyup = function(e){
+            //     clearInterval(Timer);
+            // }
+
+        }
+        img.src = "./精灵图/士兵(1).png";
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>储存登录信息</title>
+    <style>
+        .form > div {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h3>用户登录</h3>
+    <p>
+        <label>账号:<input placeholder="请输入账号" type="text" id="account"></label>
+    </p>
+    <p>
+        <label>密码:<input  placeholder="请输入密码" type="password" id="password"></label>
+    </p>
+    <p>
+        <label><input type="checkbox"  id="rememberId"> <span>是否记住账号密码？</span></label>
+    </p>
+    <p><input type="submit" value="登录" id="login_btn"></p>
+
+    <script>
+        function $( cssSeletor ){
+            return document.querySelector( cssSeletor );
+        }
+
+        var userInfo = window.localStorage.getItem("myUserInfo");
+        if( userInfo != null ){
+            var data = JSON.parse( userInfo );
+            // 设置输入框的值
+            $("#account").value = data.username;
+            $("#password").value = data.userpass;
+            // 设置复选框的状态
+            $("#rememberId").checked = true;
+        }
+
+        $("#login_btn").onclick = function(){
+            // 复选框是否选中
+            var isRemember = $("#rememberId").checked;
+            if( isRemember ){ // 需要把信息保存到本地存储中
+                var userinfo = {};
+                userinfo.username = $("#account").value;
+                userinfo.userpass = $("#password").value;
+                
+                if( userinfo.username == "" || userinfo.userpass == "" ){
+                    alert("账号与密码不能为空");
+                    return;
+                }
+                var jsonData = JSON.stringify( userinfo );
+
+                window.localStorage.setItem( "myUserInfo" , jsonData );
+            }else{
+                // 不设置缓存数据
+                window.localStorage.removeItem("myUserInfo");
+            }
+        }
+    </script>
+</body>
+</html>

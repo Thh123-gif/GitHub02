@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 第一种方式:使用HTML中的img图片标签加载图片 -->
+    <img src="images/01.png" id="img1"/>
+
+    <script>
+        // 获取#img1对象
+        var img1 = document.querySelector("#img1");
+        img1.onload = function(){
+            console.log( img1 );
+            console.log( img1.width );
+            console.log( img1.height );
+            console.log("");
+        }
+
+        // 第二种方式:使用document.createElement("img")创建一个图片标签放在内存中
+        var img2 = document.createElement("img");
+        // 需要把图片添加到页面中才可以看到
+        document.body.appendChild( img2 );
+        // console.log( img2 );
+        // 图片也有一个加载完成事件 onload
+        img2.onload = function(){
+            console.log( img2 );
+            // 拿到图片元素的宽度
+            console.log( img2.width );
+            // 拿到图片元素的高度
+            console.log( img2.height );
+            console.log("");
+        }
+        // 设置图片所在路径
+        img2.src = "images/02.jpg";
+
+        // 第三种方式: 构造函数  new Image();
+        var img3 = new Image();
+        img3.onload = function(){
+            console.log( img3 );
+            // 拿到图片元素的宽度
+            console.log( img3.width );
+            // 拿到图片元素的高度
+            console.log( img3.height );
+
+            // 需要把图片添加到页面中才可以看到
+            document.body.appendChild( img3 );
+        }
+        img3.src = "images/05.gif";
+    </script>
+</body>
+</html>

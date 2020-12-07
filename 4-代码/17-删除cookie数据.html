@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>获取cookie中所有数据</button>
+    <button>删除cookie中的uname数据</button>
+
+    <script>
+        var btns = document.querySelectorAll("button");
+        btns[0].onclick = function(){
+            console.log( document.cookie );
+        }
+        btns[1].onclick = function(){
+            // 使用 JavaScript 删除 Cookie
+            // 删除 cookie 非常简单。您只需要设置 expires 参数为以前的时间即可，如下所示，设置为 Thu, 01 Jan 1970 00:00:00 GMT:
+            // document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            // 注意，当您删除时不必指定 cookie 的值。
+
+            document.cookie = "uname=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    </script>
+</body>
+</html>

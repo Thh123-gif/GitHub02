@@ -1,0 +1,107 @@
+画封闭的图形时要添加(否则会出现小间隙)
+.beginPath();
+.closePath();
+
+//封闭的图形时
+填充背景颜色：(先填充背景颜色，再描边)
+.fillStyle = 
+.fill();
+
+默认线条的粗细是1，#000
+//线条模糊产生原因:对齐的点是线的中心位置，浏览器不能渲染0.5px的线条
+//解决方案：上下增加0.5或减少0.5
+
+描边：.stroke();
+线的颜色：.strokeStyle = ;
+线宽：.lineWidth = ;
+线条两端的形状：.lineCap = "round,space";
+线条拐角的形状：.lineJoin = "round,space";
+设置当前线段的样式：.setLinDash([5]);   .setLinDash([5(线宽),20(间隔)])
+
+绘制矩形：.rect(x,y,width,height); //起点坐标的x,y
+自动描边：.strokeRect(x,y,width,height);
+自动填充矩形：.fillRect(x,y,width,height);
+橡皮檫：.clearRect(x,y,width,height);
+画圆：.arc(x,y,半径,开始的弧度,结束的弧度(2 * Math.PI),true(逆时针),false(顺时针));
+
+绘制文本：.fillText("内容",x,y);
+设置字体：.font = "18px 微软雅黑";(必须要写两个属性值)
+字体对齐方式：.textAlign = "center";
+字体排列方式：.direction = "ltr";//ltr从左到右,rtl从右到左
+字体基线对齐方式：.textBaseline = "middle";
+描边文字：.strokeText("内容",x,y);
+
+绘制图片：.drawImage(image,sx,sy,sWidth,sHeight,dx,dy,dWidth,dHeight);
+        image: 图片的DOM元素,
+        sx: 裁切的坐标位置x,
+        sy: 裁切的坐标位置y,
+        sWidth: 裁切的宽度,
+        sHeight: 裁切的宽度高度,
+        dx: 图片出现在画布的坐标x,
+        dy: 图片出现在画布的坐标x,
+        dWidth: 图片的宽度,
+        dHeight: 图片的高度
+
+图表专业制作：Echar
+https://echarts.apache.org/examples/zh/index.html
+
+1. 下载ECharts
+https://echarts.apache.org/zh/download.html
+2. 引入ECharts所需js文件(主要引入dist目录下echarts.js文件)
+<script src="incubator-echarts/dist/echarts.js"></script>
+3. 准备图表容器
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main" style="width: 600px;height:400px;"></div>
+4. 初始化echarts实例
+echarts.init(DOM对象);
+// 返回值是echarts实例
+5. 设置图表的配置项（数据）
+echarts实例.setOption(配置对象);
+
+Cookie 是一些数据, 存储于你电脑上的文本文件中
+cookie 默认关闭网页后失效
+设置cookie: document.cookie = "uname = ";
+.setTime(); 以毫秒值设置时间
+时间戳设置：    
+var d = new Date();
+d.setTime(d.getTime()+天数 * 24*60*60*1000);
+var expires = "expires="+d.toGMTString();//转换为格林尼治时间
+document.cookie = "uname = zahngsahan; "+expires;   //注意分号后面加空格
+
+cookie特点：
+存储容量为4k
+需要http服务
+同一浏览器
+同一服务器环境
+
+autocomplete="off";// 关闭自动生成提示
+
+window.sessionStorage:
+    存储容量为5M
+    它的生命周期为关闭页面，数据会自动清除
+    只在本页面有效，不同页面设置的sessionStorage，获取到的数据不同
+
+    设置sessionStorage:
+    window.sessionStorage(键名,值) 设置同一个会覆盖
+    e.g window.sessionStorage.setItem("uname",iptValue);
+
+    获取sessionStorage:不存在会返回null
+    window.sessionStorage.getItem("uname");
+
+    删除sessionStorage.removeItem("键名");
+    清空sessionStorage.clear();
+
+window.localStorage:
+    存储容量为20M
+    可以跨界面共享数据，前提是需要同源，不同浏览器之间不可以共享数据
+    它的生命周期为永久，存储在系统的存储空间中，数据需要手动清除
+
+    设置localStorage:
+    window.localStorage(键名,值) 设置同一个会覆盖
+    e.g window.localStorage.setItem("uname",iptValue);
+
+    获取localStorage:不存在会返回null
+    window.localStorage.getItem("uname");
+
+    删除localStorage.removeItem("键名");
+    清空localStorage.clear();

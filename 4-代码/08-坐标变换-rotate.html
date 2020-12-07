@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600" height="400">浏览器不支持画布标签</canvas>
+    <script>
+        var mycanvas = document.querySelector("canvas");
+        var ctx = mycanvas.getContext("2d");
+        ctx.rotate( 30*( Math.PI/180 ) );
+        ctx.rect( 100, 100 , 300 , 200 );
+        ctx.stroke();
+
+        // 360=>2π
+        // 1 => 2π/360
+        // 1 => π/180
+    </script>
+</body>
+</html>

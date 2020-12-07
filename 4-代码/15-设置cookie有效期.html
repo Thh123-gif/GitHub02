@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var d = new Date();
+        // 设置存在两天
+        // d.setTime( d.getTime()+2*24*60*60*1000 );
+
+        // 设置存在15秒
+        // d.setTime( d.getTime()+15000 );
+
+        // 设置存在1小时
+        d.setTime( d.getTime()+60*60*1000 );
+        
+        // console.log( d );
+        // console.log( d.toLocaleString() );
+        // console.log( d.toGMTString() );
+        var expires = "expires="+d.toGMTString();
+        document.cookie = "uname=王五; "+expires;
+        document.cookie = "age=23; "+expires;
+    </script>
+</body>
+</html>

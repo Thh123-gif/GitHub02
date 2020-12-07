@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            /* 给html标签设置字体大小为100px */
+            font-size:100px;
+        }
+        body{
+            font-size:50px;
+        }
+        .granderfather{
+            width: 500px;
+            height: 500px;
+            background: orange;
+            /* 设置.granderfather字体大小为60px */
+            font-size:60px;
+        }
+        .granderfather .father{
+            width: 350px;
+            height: 350px;
+            background: pink;
+            /* 设置.father字体大小为40px */
+            font-size:40px;
+        }
+        .granderfather .father .son{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            /* 设置.son字体大小为20px */
+            font-size:20px;
+
+            /* 小结: */
+            /* rem比em多一个r,  r指的就是root根元素的以后, rem不管怎样,都是相对"html标签"的字体大小 */
+            /* 1rem就等于一个html的字体大小 */
+            /* 所以想要rem动态变化,只需要想办法让html的字体大小变化即可 */
+            padding-left: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="granderfather">
+        <div class="father">
+            <div class="son">son元素内容</div>
+        </div>
+    </div>
+</body>
+</html>

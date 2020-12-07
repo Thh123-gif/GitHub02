@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib-flexible-2.0/index.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* flexible.js默认设置html的字体大小都是除以10的 */
+        /* 我们还可以在flexible.js设置找字体大小的基础上,结合媒体查询,对html的字体大小,加以限制 */
+        /* 比如,我们想网页如果超过了750px,那么我们的大小都是75px */
+        @media screen and (min-width: 750px ){
+            html{
+                /* 注意:优先级不够,需要提升 */
+                font-size:75px !important;
+            }
+        }
+        /* vscode里面,我们可以安装一个cssrem插件,用于把px单位转成rem单位 */
+        /* cssrem需要自己配置一个html字体大小 比如,我们的设计稿的尺寸宽度是750px,那么我们就需要把cssrem默认字体大小改为75px 修改完配置,需要重新启动vscode */
+        p{
+            background: skyblue;
+            width: 10rem;
+            height: 0.853333rem;
+            margin:0 auto;
+            font-size: 0.213333rem;
+        }
+        img{
+            width: 3.2rem;
+            height: 3.2rem;
+            margin-left: 0.133333rem;
+        }
+    </style>
+</head>
+<body>
+    <p>段落内容</p>
+    <img src="images/02.jpg"/>
+</body>
+</html>

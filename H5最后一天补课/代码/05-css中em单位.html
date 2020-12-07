@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .granderfather{
+            width: 500px;
+            height: 500px;
+            background: orange;
+            /* 设置.granderfather字体大小为60px */
+            font-size:60px;
+        }
+        .granderfather .father{
+            width: 350px;
+            height: 350px;
+            background: pink;
+            /* 设置.father字体大小为40px */
+            font-size:40px;
+        }
+        .granderfather .father .son{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            /* css中经常使用的尺寸单位是px,但是除了px,还有em与rem */
+            /* font-size:16px; */
+
+            /* 网页中默认字体大小是16px */
+            /* 简单的理解就是1em就是1个字体大小 */
+
+            /* 在CSS中,字体相关属性,除了颜色不能继承,其他都可以继承,包括字体大小 */
+
+            /* 设置.son字体大小为20px */
+            font-size:20px;
+            padding-left:1em;
+
+            /* 小结: 
+                1. em单位的大小是相对自身字体大小而言的
+                2. 自己的字体大小又可以从父辈中继承
+             */
+        }
+    </style>
+</head>
+<body>
+    <div class="granderfather">
+        <div class="father">
+            <div class="son">son元素内容</div>
+        </div>
+    </div>
+</body>
+</html>
